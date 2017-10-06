@@ -3,5 +3,11 @@ h1 {
     color: #8B078B;
 }
 body {
-    background-color:#F1EC52
+  
+    background: url("../images/restaurant_icons.png") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: #DB900D
 }
