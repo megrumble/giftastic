@@ -1,9 +1,9 @@
 // initial array of foods
 var topics = ["watermelon", "pumpkin", "tomato", "pie", "cake", "pizza", "spaghetti", ];
 //make butttons
-var src;
-var dataUrl;
-var foodImage;
+// var src;
+// var dataUrl;
+// var foodImage;
 
 function renderButtons() {
     $("#food-view").empty();
@@ -59,24 +59,35 @@ $(".food").on("click", function (event) {
                 // Setting the src attribute of the image to a property pulled off the result item
                 foodImage.attr({
                     "src": results[i].images.fixed_height_still.url,
-                    "data-url": results[i].images.fixed_height.url
+                    "data-still":results[i].images.fixed_height_still.url,
+                    "data-animate": results[i].images.fixed_height.url,
+                    "data-state": "still",
                 });
-              
+                // var src = foodImage.attr["src"];
+                // var dataUrl = foodImage.attr["data-url"];
                 foodImage.addClass("image");
                 // Appending the paragraph and image tag to the foodDiv
                 foodDiv.append(p);
                 foodDiv.append(foodImage)
                 $("#gifs-appear-here").prepend(foodDiv);
+                // console.log(this);
+                // console.log(foodImage);
             };
             $(".image").on("click", function () {
 
                 console.log("hi")
                 console.log(this);
-                src = foodImage.attr["src"];
-                dataUrl = foodImage.attr["data-url"];
-                var temp=src;
-                src=dataUrl;
-                dataUrl=temp;
+                var state = $(this).attr("data-state");
+                // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+                // Then, set the image's data-state to animate
+                // Else set src to the data-still value
+                if (state === "still") {
+                  $(this).attr("src", $(this).attr("data-animate"));
+                  $(this).attr("data-state", "animate");
+                } else {
+                  $(this).attr("src", $(this).attr("data-still"));
+                  $(this).attr("data-state", "still");
+                }
 
 
             });
